@@ -1,4 +1,4 @@
-﻿using QuizApp.Properties;
+using QuizApp.Properties;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -248,12 +248,26 @@ namespace QuizApp
                     break;
             }
         }
+        int OperationWithOptions()
+        {
+            switch(MathQuizData.Operation)
+            {
+                case '+':
+                    return GetRandomNumber(1, 100) + GetRandomNumber(1, 100);
+                case '-':
+                    return GetRandomNumber(1, 100) - GetRandomNumber(1, 100);
+                case '*':
+                    return GetRandomNumber(1, 100) * GetRandomNumber(1, 100);
+                default:
+                    return GetRandomNumber(1, 100) / GetRandomNumber(1, 100);
+            }
+        }
         int FillMathOptions()
         {
             int Option = default;
             do
             {
-                Option = GetRandomNumber(1, 100);
+                Option = OperationWithOptions();
             } while (Option == MathQuizData.RightAnswer);
 
             return Option;
