@@ -202,25 +202,25 @@ namespace QuizApp
             public byte Time;
             public string Question;
             public char Operation;
-            public int Num1;
-            public int Num2;
-            public int OptionA;
-            public int OptionB;
-            public int OptionC;
-            public int OptionD;
-            public int RightAnswer;
+            public float Num1;
+            public float Num2;
+            public float OptionA;
+            public float OptionB;
+            public float OptionC;
+            public float OptionD;
+            public float RightAnswer;
         }
         stMathQuizData MathQuizData = new stMathQuizData();
         
         Random rd = new Random();
-        int GetRandomNumber(int From, int To)
+        float GetRandomNumber(int From, int To)
         {
             return rd.Next(From, To);
         }
         void GetMathOperation()
         {
             char[] OpArr = { '+', '-', '*', '/' };
-            MathQuizData.Operation = OpArr[GetRandomNumber(0, 3)];
+            MathQuizData.Operation = OpArr[(byte)GetRandomNumber(0, 4)];
         }
         void FillMathNum1AndNum2()
         {
@@ -248,7 +248,7 @@ namespace QuizApp
                     break;
             }
         }
-        int OperationWithOptions()
+        float OperationWithOptions()
         {
             switch(MathQuizData.Operation)
             {
@@ -262,9 +262,9 @@ namespace QuizApp
                     return GetRandomNumber(1, 100) / GetRandomNumber(1, 100);
             }
         }
-        int FillMathOptions()
+        float FillMathOptions()
         {
-            int Option = default;
+            float Option = default;
             do
             {
                 Option = OperationWithOptions();
@@ -452,6 +452,7 @@ namespace QuizApp
                 ToggleButtonsEnableDisable(false);
                 lblMathAfterAnswer.BackColor = Color.DimGray;
                 lblMathAfterAnswer.Text = "Time is up!" + Environment.NewLine;
+                lblMathAfterAnswer.Text += $"Right Answer is {MathQuizData.RightAnswer}";
                 lblMathAfterAnswer.Visible = true;
                 btnNextQuestion.Text = "Next";
                 btnNextQuestion.Visible = true;
